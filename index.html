@@ -69,11 +69,6 @@
 		<label for="building">Building</label>
 		<select id="building" name="building" required>
 			<option value="" disabled selected>Select a building</option>
-			<option value="Science Hall">Science Hall</option>
-			<option value="Library">Library</option>
-			<option value="Engineering Building">Engineering Building</option>
-			<option value="Student Center">Student Center</option>
-			<option value="Other">Other</option>
 		</select>
 
 		<label for="floor">Floor</label>
@@ -84,6 +79,27 @@
 
 		<button type="submit">Submit Report</button>
 	</form>
+
+	<script>
+		// JSON object containing building names and numbers
+		const buildings = [
+			{ id: "1", name: "Science Hall" },
+			{ id: "2", name: "Library" },
+			{ id: "3", name: "Engineering Building" },
+			{ id: "4", name: "Student Center" },
+			{ id: "5", name: "Gymnasium" },
+			{ id: "6", name: "Dormitory A" },
+		];
+
+		// Populate the building dropdown
+		const buildingSelect = document.getElementById("building");
+		buildings.forEach(building => {
+			const option = document.createElement("option");
+			option.value = building.id;
+			option.textContent = `${building.name}`;
+			buildingSelect.appendChild(option);
+		});
+	</script>
 </body>
 
 </html>
