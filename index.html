@@ -14,6 +14,7 @@
 
 		h1 {
 			color: #0056b3;
+			text-align: center;
 		}
 
 		form {
@@ -35,12 +36,15 @@
 		textarea,
 		select,
 		button {
-			width: 100%;
+			width: calc(100% - 20px);
+			/* Added padding adjustment */
 			margin-top: 5px;
 			padding: 10px;
 			border: 1px solid #cccccc;
 			border-radius: 4px;
 			font-size: 16px;
+			box-sizing: border-box;
+			/* Ensures padding is included in width calculation */
 		}
 
 		button {
