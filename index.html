@@ -86,6 +86,7 @@
 		<input type="hidden" name="contact_method" value="Text">
 		<input type="hidden" name="category" value="Structural Building Maintainance">
 		<input type="hidden" name="subcategory" value="Automated Accessible Door Operator">
+		<input type="hidden" id="room" name="room" value="Not provided">
 		<button type="submit">Submit Report</button>
 	</form>
 
@@ -108,6 +109,14 @@
 			option.textContent = `${building.name}`;
 			buildingSelect.appendChild(option);
 		});
+
+
+		// accept room number from URL parameters
+		const urlParams = new URLSearchParams(window.location.search);
+		const room = urlParams.get("room");
+		if (room) {
+			document.getElementById("room").value = room;
+		}
 	</script>
 </body>
 
