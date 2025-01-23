@@ -1,77 +1,89 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Report Broken Accessibility Device</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 20px;
-      background-color: #f9f9f9;
-    }
-    h1 {
-      color: #0056b3;
-    }
-    form {
-      background: #ffffff;
-      padding: 20px;
-      border-radius: 8px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-      max-width: 400px;
-      margin: auto;
-    }
-    label {
-      display: block;
-      margin-top: 10px;
-      font-weight: bold;
-    }
-    input, textarea, select, button {
-      width: 100%;
-      margin-top: 5px;
-      padding: 10px;
-      border: 1px solid #cccccc;
-      border-radius: 4px;
-      font-size: 16px;
-    }
-    button {
-      background-color: #0056b3;
-      color: white;
-      border: none;
-      cursor: pointer;
-      margin-top: 20px;
-    }
-    button:hover {
-      background-color: #003d80;
-    }
-  </style>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Report Broken Accessibility Device</title>
+	<style>
+		body {
+			font-family: Arial, sans-serif;
+			margin: 20px;
+			background-color: #f9f9f9;
+		}
+
+		h1 {
+			color: #0056b3;
+		}
+
+		form {
+			background: #ffffff;
+			padding: 20px;
+			border-radius: 8px;
+			box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+			max-width: 400px;
+			margin: auto;
+		}
+
+		label {
+			display: block;
+			margin-top: 10px;
+			font-weight: bold;
+		}
+
+		input,
+		textarea,
+		select,
+		button {
+			width: 100%;
+			margin-top: 5px;
+			padding: 10px;
+			border: 1px solid #cccccc;
+			border-radius: 4px;
+			font-size: 16px;
+		}
+
+		button {
+			background-color: #0056b3;
+			color: white;
+			border: none;
+			cursor: pointer;
+			margin-top: 20px;
+		}
+
+		button:hover {
+			background-color: #003d80;
+		}
+	</style>
 </head>
+
 <body>
-  <h1>Report Broken Accessibility Device</h1>
-  <form action="/submit-report" method="post">
-    <label for="name">Your Name</label>
-    <input type="text" id="name" name="name" required placeholder="Enter your name">
+	<h1>Report Broken Accessibility Device</h1>
+	<form action="/submit-report" method="post">
+		<label for="name">Your Name</label>
+		<input type="text" id="name" name="name" required placeholder="Enter your name">
 
-    <label for="email">Your Email</label>
-    <input type="email" id="email" name="email" required placeholder="Enter your email">
+		<label for="email">Your Email</label>
+		<input type="email" id="email" name="email" required placeholder="Enter your email">
 
-    <label for="building">Building</label>
-    <select id="building" name="building" required>
-      <option value="" disabled selected>Select a building</option>
-      <option value="Science Hall">Science Hall</option>
-      <option value="Library">Library</option>
-      <option value="Engineering Building">Engineering Building</option>
-      <option value="Student Center">Student Center</option>
-      <option value="Other">Other</option>
-    </select>
+		<label for="building">Building</label>
+		<select id="building" name="building" required>
+			<option value="" disabled selected>Select a building</option>
+			<option value="Science Hall">Science Hall</option>
+			<option value="Library">Library</option>
+			<option value="Engineering Building">Engineering Building</option>
+			<option value="Student Center">Student Center</option>
+			<option value="Other">Other</option>
+		</select>
 
-    <label for="floor">Floor</label>
-    <input type="number" id="floor" name="floor" required placeholder="Enter the floor number" min="0">
+		<label for="floor">Floor</label>
+		<input type="number" id="floor" name="floor" required placeholder="Enter the floor number" min="0">
 
-    <label for="description">Description of the Problem</label>
-    <textarea id="description" name="description" required placeholder="Describe the issue..." rows="5"></textarea>
+		<label for="description">Description of the Problem</label>
+		<textarea id="description" name="description" required placeholder="Describe the issue..." rows="5"></textarea>
 
-    <button type="submit">Submit Report</button>
-  </form>
+		<button type="submit">Submit Report</button>
+	</form>
 </body>
+
 </html>
