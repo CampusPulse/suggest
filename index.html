@@ -72,7 +72,7 @@
 		</select>
 
 		<label for="floor">Floor</label>
-		<input type="number" id="floor" name="floor" required placeholder="Enter the floor number" min="0">
+		<input type="text" id="floor" name="floor" required placeholder="Enter the floor (e.g., A for Basement, 1, 2, etc.)" pattern="A|[0-9]+" title="Enter 'A' for Basement or a numeric value">
 
 		<label for="description">Description of the Problem</label>
 		<textarea id="description" name="description" required placeholder="Describe the issue..." rows="5"></textarea>
