@@ -5,42 +5,29 @@ title: Report Summary
 
 <h1>{{page.title}}</h1>
 <div class="summary">
-	<p><strong>Phone Number:</strong> <span id="phone"></span></p>
-	<p><strong>Contact Method:</strong> <span id="contact-method"></span></p>
-	<p><strong>Building:</strong> <span id="building"></span></p>
-	<!-- TODO: building name -->
-	<p><strong>Floor:</strong> <span id="floor"></span></p>
-	<p><strong>Room:</strong> <span id="room"></span></p>
-	<p><strong>Category:</strong> <span id="category"></span></p>
-	<p><strong>Subcategory:</strong> <span id="subcategory"></span></p>
-	<p><strong>Description:</strong> <span id="description"></span></p>
+	<!-- Summary fields will be populated here -->
 </div>
 
 <script>
-	// Function to parse GET parameters from URL
-	function getQueryParams() {
-		const params = new URLSearchParams(window.location.search);
-		return {
-			phone: params.get("phone") || "Not provided",
-			contactMethod: params.get("contact_method") || "Not provided",
-			building: params.get("building") || "Not provided",
-			// TODO: handle building name
-			floor: params.get("floor") || "Not provided",
-			room: params.get("room") || "Not provided",
-			category: params.get("category") || "Not provided",
-			subcategory: params.get("subcategory") || "Not provided",
-			description: params.get("description") || "Not provided",
-		};
+
+	function toHumanString( ident_string ) {
+		let string = ident_string.replace("_", " ");
+		string = string.replace("-", " ");
+
+		string = string.split(" ").map(word => {
+			return word.charAt(0).toUpperCase() + word.slice(1);
+		}).join(" ");
+
+		return string;
 	}
 
 	// Populate fields with URL parameters
-	const queryParams = getQueryParams();
-	document.getElementById("phone").textContent = queryParams.phone;
-	document.getElementById("contact-method").textContent = queryParams.contactMethod;
-	document.getElementById("building").textContent = queryParams.building;
-	document.getElementById("floor").textContent = queryParams.floor;
-	document.getElementById("room").textContent = queryParams.room;
-	document.getElementById("category").textContent = queryParams.category;
-	document.getElementById("subcategory").textContent = queryParams.subcategory;
-	document.getElementById("description").textContent = queryParams.description;
+	const params = new URLSearchParams(window.location.search);
+	const summary = document.getElementsByClassName("summary")[0];
+	// loop through the query parameters and populate the summary fields
+	for (const [key, value] of params) {
+		const summaryElement = document.createElement("p");
+		summaryElement.innerHTML = `<strong>${toHumanString(key)}:</strong> <span id="${key}">${value}</span>`
+		summary.appendChild(summaryElement);
+	}
 </script>
