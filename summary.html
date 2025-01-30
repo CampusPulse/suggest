@@ -30,6 +30,9 @@ title: Report Summary
 	// loop through the query parameters and populate the summary fields, but only for keys that don't start with an underscore (i.e. internal data)
 	for (const [key, value] of params) {
 		if ( !key.startsWith("_")) {
+			if (value === ""){
+				continue;
+			}
 			const summaryElement = document.createElement("p");
 			summaryElement.innerHTML = `<strong>${toHumanString(key)}:</strong> <span id="${key}">${value}</span>`
 			summary.appendChild(summaryElement);
