@@ -3,4 +3,6 @@ description: Report things to ServiceNow.
 
 servicenow_domain: ""
 
+baseurl: ""
+
 exclude: ["Gemfile", "Gemfile.lock"]
