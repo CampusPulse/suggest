@@ -1,6 +1,18 @@
 ---
 layout: default
 title: Report Broken Accessibility Device
+
+staticvalues:
+  - name: phone
+    value: 503 832 7422
+  - name: contact_method
+    value: Text
+  - name: category
+    value: Structural Building Maintenance
+  - name: subcategory
+    value: Automated Accessible Door Operator
+  - name: room
+    value: Not provided
 ---
 
 <h1>{{page.title}}</h1>
@@ -23,11 +35,9 @@ title: Report Broken Accessibility Device
 	<textarea id="description" name="description" required placeholder="Describe the issue..." rows="5"></textarea>
 	
 	<!-- hidden form items -->
-	<input type="hidden" name="phone" value="503 832 7422">
-	<input type="hidden" name="contact_method" value="Text">
-	<input type="hidden" name="category" value="Structural Building Maintainance">
-	<input type="hidden" name="subcategory" value="Automated Accessible Door Operator">
-	<input type="hidden" id="room" name="room" value="Not provided">
+	 {% for item in page.staticvalues %}
+		<input type="hidden" name="{{ item.name }}" value="{{ item.value }}">
+	{% endfor %}
 	<!-- TODO: submit building name too -->
 	<button type="submit">Submit Report</button>
 </form>
