@@ -1,6 +1,9 @@
-# 
+# Issue Reporting Shortcut System
 
 
-## running
 
-`python3 -m http.server`
+## running (dev)
+
+`bundle install`
+
+`bundle exec jekyll serve`
