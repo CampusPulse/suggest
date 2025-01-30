@@ -1,0 +1,3 @@
+title: Accessibility Reporting
+description: Report broken accessibility devices on campus.
+exclude: ["Gemfile", "Gemfile.lock"]
