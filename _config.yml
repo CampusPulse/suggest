@@ -1,3 +1,6 @@
-title: Accessibility Reporting
-description: Report broken accessibility devices on campus.
+title: CampusPulse Report
+description: Report things to ServiceNow.
+
+servicenow_domain: ""
+
 exclude: ["Gemfile", "Gemfile.lock"]
