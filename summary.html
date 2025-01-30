@@ -13,6 +13,10 @@ title: Report Summary
 
 <script>
 
+	const submitButton = document.getElementById("submitButton");
+	const summary = document.getElementsByClassName("summary")[0];
+
+
 	function toHumanString( ident_string ) {
 		let string = ident_string.replace("_", " ");
 		string = string.replace("-", " ");
@@ -26,7 +30,6 @@ title: Report Summary
 
 	// Populate fields with URL parameters
 	const params = new URLSearchParams(window.location.search);
-	const summary = document.getElementsByClassName("summary")[0];
 	// loop through the query parameters and populate the summary fields, but only for keys that don't start with an underscore (i.e. internal data)
 	for (const [key, value] of params) {
 		if ( !key.startsWith("_")) {
@@ -40,8 +43,6 @@ title: Report Summary
 			// check the internal key so we can handle it specifically
 			if (key === "_sys_id") {
 				// if the key is _sys_id, we need to create the form submission button
-				const submitButton = document.getElementById("submitButton");
-				// build the button
 				const buttonlink = document.createElement("a");
 				buttonlink.href = `https://{{ site.servicenow_domain }}/sp?id=sc_cat_item&sys_id=${value}`;
 				const button = document.createElement("button");
