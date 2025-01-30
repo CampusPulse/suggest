@@ -1,0 +1,55 @@
+---
+layout: default
+title: Report Broken Accessibility Device
+---
+
+<h1>{{page.title}}</h1>
+<form action="/summary.html" method="get">
+	<label for="name">Your Name</label>
+	<input type="text" id="name" name="name" required placeholder="Enter your name">
+	
+	<label for="email">Your Email</label>
+	<input type="email" id="email" name="email" required placeholder="Enter your email">
+	
+	<label for="building">Building</label>
+	<select id="building" name="building" required>
+		<option value="" disabled selected>Select a building</option>
+	</select>
+	
+	<label for="floor">Floor</label>
+	<input type="text" id="floor" name="floor" required placeholder="Enter the floor (e.g., A for Basement, 1, 2, etc.)" pattern="A|[0-9]+" title="Enter 'A' for Basement or a numeric value">
+	
+	<label for="description">Description of the Problem</label>
+	<textarea id="description" name="description" required placeholder="Describe the issue..." rows="5"></textarea>
+	
+	<!-- hidden form items -->
+	<input type="hidden" name="phone" value="503 832 7422">
+	<input type="hidden" name="contact_method" value="Text">
+	<input type="hidden" name="category" value="Structural Building Maintainance">
+	<input type="hidden" name="subcategory" value="Automated Accessible Door Operator">
+	<input type="hidden" id="room" name="room" value="Not provided">
+	<!-- TODO: submit building name too -->
+	<button type="submit">Submit Report</button>
+</form>
+
+<script>
+	// Load buildings from JSON
+	fetch('/buildings.json')
+		.then(response => response.json())
+		.then(data => {
+			const buildingSelect = document.getElementById('building');
+			data.buildings.forEach(building => {
+				const option = document.createElement('option');
+				option.value = building.id;
+				option.textContent = `${building.name}`;
+				buildingSelect.appendChild(option);
+			});
+		});
+
+	// accept room number from URL parameters
+	const urlParams = new URLSearchParams(window.location.search);
+	const room = urlParams.get("room");
+	if (room) {
+		document.getElementById("room").value = room;
+	}
+</script>
