@@ -1,0 +1,39 @@
+# create a github issue form to report issues with a form on the website
+
+name: Form Issue
+description:  Report an issue with an issue reporting form
+title: "[Form]: "
+labels: ["bug", "triage"]
+# projects: ["octo-org/1", "octo-org/44"]
+# assignees:
+#   - octocat
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to let us know about issues with one of our reporting forms!
+  - type: checkboxes
+    id: checked
+    attributes:
+      label: I have checked for existing reports of this issue
+      description: Have you checked the issues tab to see if this issue has already been reported?
+      options:
+        - label: I have confirmed that this issue has not been reported
+          required: true
+  - type: input
+    id: page
+    attributes:
+      label: page
+      description: Which form or page did you have an issue with?
+      placeholder: ex. https://report.campuspulse.app/bus.html
+    validations:
+      required: false
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened?
+      description: What were you trying to do? Please be as detailed as possible.
+      placeholder: Tell us what you see!
+      value: "## What were you trying to do?\n\n\n\n## What did you expect to see?\n\n\n\n## What did you actually see?\n\n\n\n"
+    validations:
+      required: true
