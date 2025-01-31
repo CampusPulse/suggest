@@ -1,0 +1,58 @@
+---
+layout: default
+title: Report Bus Issues
+
+staticvalues:
+  - name: what-area-does-this-pertain-to
+    value: Parking and Transportation Services
+
+submit_method: assisted
+---
+
+<h1>{{page.title}}</h1>
+<form action="/summary.html" method="get">
+	<label for="name">Your Name</label>
+	<input type="text" id="name" name="name" placeholder="Enter your name">
+	
+	<label for="email">Your Email</label>
+	<input type="email" id="email" name="email" placeholder="Enter your email">
+	
+	<label for="route">What route is affected?</label>
+	<select id="route" name="route" required>
+		<option value="" disabled selected>Select a route</option>
+	</select>
+
+	<label for="stop">Which stop is affected?</label>
+	<input type="text" id="stop" name="stop" placeholder="Gleason Circle" required>
+
+	
+	<label for="description">Description of the Problem</label>
+	<textarea id="description" name="description" placeholder="Describe the issue..." rows="5"></textarea>
+	
+	<!-- hidden form items -->
+	{% for item in page.staticvalues %}
+		<input type="hidden" name="{{ item.name }}" value="{{ item.value }}">
+	{% endfor %}
+
+	{% if page.submit_method == "assisted" %}
+	<input type="hidden" name="_sys_id" value="{{ page.sys_id }}">
+	{% endif %}
+
+	<!-- TODO: submit building name too -->
+	<button type="submit">Submit Report</button>
+</form>
+
+<script>
+	// Load buildings from JSON
+	fetch('/busroutes.json')
+		.then(response => response.json())
+		.then(data => {
+			const routeSelect = document.getElementById('route');
+			data.routes.forEach(route => {
+				const option = document.createElement('option');
+				option.value = `${route.id}`;
+				option.textContent = `${route.id} ${route.name}`;
+				routeSelect.appendChild(option);
+			});
+		});
+</script>
