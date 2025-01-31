@@ -1,7 +1,7 @@
 title: CampusPulse Report
 description: Report things to ServiceNow.
 
-servicenow_domain: ""
+servicenow_domain: "help.rit.edu"
 
 baseurl: ""
 
