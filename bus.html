@@ -23,12 +23,13 @@ submit_method: assisted
 	</select>
 
 	<label for="stop">Which stop is affected?</label>
-	<input type="text" id="stop" name="stop" placeholder="Gleason Circle" required>
+	<select id="stop" name="stop" required>
+		<option value="" disabled selected>Select a route</option>
+	</select>
 
-	
+
 	<label for="description">Description of the Problem</label>
 	<textarea id="description" name="description" placeholder="Describe the issue..." rows="5"></textarea>
-	
 	<!-- hidden form items -->
 	{% for item in page.staticvalues %}
 		<input type="hidden" name="{{ item.name }}" value="{{ item.value }}">
@@ -53,6 +54,18 @@ submit_method: assisted
 				option.value = `${route.id}`;
 				option.textContent = `${route.id} ${route.name}`;
 				routeSelect.appendChild(option);
+			});
+		});
+
+	fetch('/busstops.json')
+		.then(response => response.json())
+		.then(data => {
+			const stopSelect = document.getElementById('stop');
+			data.stops.forEach(stop => {
+				const option = document.createElement('option');
+				option.value = `${stop.id} ${stop.name}`;
+				option.textContent = `${stop.id} ${stop.name}`;
+				stopSelect.appendChild(option);
 			});
 		});
 </script>
