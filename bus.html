@@ -54,7 +54,7 @@ submit_method: assisted
 			const routeSelect = document.getElementById('route');
 			data.routes.forEach(route => {
 				const option = document.createElement('option');
-				option.value = `${route.id}`;
+				option.value = `${route.id} ${route.name}`;
 				option.textContent = `${route.id} ${route.name}`;
 				routeSelect.appendChild(option);
 			});
