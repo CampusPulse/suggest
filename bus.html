@@ -37,11 +37,6 @@ submit_method: assisted
 	{% for item in page.staticvalues %}
 		<input type="hidden" name="{{ item.name }}" value="{{ item.value }}">
 	{% endfor %}
-
-	{% if page.submit_method == "assisted" %}
-	<input type="hidden" name="_sys_id" value="{{ page.sys_id }}">
-	{% endif %}
-
 	<!-- TODO: submit building name too -->
 	{% include form_end.html method=page.submit_method %}
 
