@@ -1,0 +1,18 @@
+{%- comment -%} this file contains the logic for sending the form data different places based on the mode {%- endcomment -%}
+
+{%- comment -%} default value {%- endcomment -%}
+
+
+
+{% case template.method %}
+  {% when "assisted", "assisted-combined" %}
+	{% assign action = "/summary.html" %}
+	{% assign method = "get" %}
+  {% else %}
+	{% assign action = "/summary.html" %}
+	{% assign method = "get" %}
+{% endcase %}
+
+
+
+<form action="{{ action }}" method="{{ method }}">

@@ -13,10 +13,13 @@ staticvalues:
     value: Automated Accessible Door Operator
   - name: room
     value: Not provided
+
+submit_method: assisted
+#condense_except:
 ---
 
 <h1>{{page.title}}</h1>
-<form action="/summary.html" method="get">
+{% include form_start.html method=page.submit_method %}
 	<label for="name">Your Name</label>
 	<input type="text" id="name" name="name" required placeholder="Enter your name">
 	
@@ -39,9 +42,7 @@ staticvalues:
 		<input type="hidden" name="{{ item.name }}" value="{{ item.value }}">
 	{% endfor %}
 	<!-- TODO: submit building name too -->
-	<button type="submit">Submit Report</button>
-	{% include form_issues.html %}
-</form>
+	{% include form_end.html %}
 
 <script>
 	// Load buildings from JSON

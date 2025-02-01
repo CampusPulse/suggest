@@ -1,0 +1,17 @@
+
+{%- comment -%} this file contains the logic for sending the form data different places based on the mode {%- endcomment -%}
+
+{% case template.method %}
+	{% when "assisted-combined" %}
+	{%- comment -%} TODO: add more here for the automated and direct submission modes {%- endcomment -%}
+	{% else %}
+		{% assign submitButtonTitle = "Continue" %}
+{% endcase %}
+
+
+{% if template.method == "assisted-condensed" %}
+	<input type="hidden" name="_condense_except" value="{{ template.condense_except }}">
+{% endif %}
+	<button type="submit">{{ submitButtonTitle }}</button>
+	{% include form_issues.html %}
+</form>
