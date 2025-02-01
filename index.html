@@ -7,30 +7,43 @@ title: CampusPulse Reporting System
 
 <p>This page is intended to act as documentation on how to use this site to direct people towards filling out ServiceNow Tickets. This page is (in most cases) not meant to be directly viewed unless you want to know how to implement this reporting process in your system</p>
 
-<h2>Reporting methods</h2>
 
-<p>There are a few reporting methods this site aims to support:</p>
+<h2>Overall Process</h2>
+<h3>Step 1: Form</h3>
+<p>The process begins with a form page, where the viewer is asked for some information. This information depends on the specific form being filled out</p>
+<h4 style="text-decoration: underline;">Available Forms:</h4>
 
-<h3>1. Automatic Form filling</h3>
+<strong>button.html (<a href="{{ " /button.html" | relative_url }}">link</a>)</strong>
+
+<p>This page is used to guide students through the process of reporting broken accessible door buttons. It is expected to be used in conjunction with the room= parameter in the URL to prefill the room number in the form.</p>
+
+<!-- TODO: elevators -->
+
+<h3>Step 2: Destination</h3>
+<p>Each form is configured with a target destination. These help determine which reporting method that the process follows.</p>
+
+<h4 style="text-decoration: underline;">Reporting methods</h4>
+
+<h4>1. Automatic Form filling</h4>
 <p><strong>Status:</strong> Pending RIT integration</p>
+<p><strong>Destination ID:</strong> TBD</p>
 <p>This method enables this site to pre-fill most or all of the information in RIT's Helpdesk forms for you by redirecting you to the RIT helpdesk with some additional data in the URL</p>
 
-<h3>2. Assisted Form Filling</h3>
+<h4>2. Assisted Form Filling</h4>
 <p><strong>Status:</strong> Available</p>
+<p><strong>Destination ID(s):</strong> <span class="pre">assisted</span>, <span class="pre">assisted-condense</span></p>
+
 <p>This method simplifies the process of reporting to RIT's Helpdesk somewhat by providing you a link to the correct helpdesk form as well as suggested values for you to copy-paste into the form</p>
+<p>For cases where the form fields are intended to match 1:1 with the fields in the helpdesk form, the <span class="pre">assisted</span> type should be used (this displays each item as a separate field in the summary). If the helpdesk form has fewer fields, the <span class="pre">assisted-condense</span> type should be used, as this will create a "summary" field containing all the relevant information</p>
 
-<!-- <h3>3. Email</h3>
+<h4>3. Submit to intermediate database</h4>
 <p><strong>Status:</strong> Coming Soon</p>
+<p><strong>Destination ID:</strong> TBD</p>
+<p>This method will submit the form to a pre-configured endpoint via HTTP POST, allowing it to be stored in a database, or otherwise dealt with by that system</p>
+
+<!-- <h4>3. Email</h4>
+<p><strong>Status:</strong> Coming Soon</p>
+<p><strong>Destination ID:</strong> TBD</p>
 <p>This method simplifies the process of reporting issues to RIT when the preferred method to recieve reports is via email. This method can generate a link that will open your email client with the correct address, subject line, and contents pre-filled</p> -->
-
-
-
-<h2>Reporting pages available</h2>
-
-<h3>button.html (<a href="{{ "/button.html" | relative_url }}">link</a>)</h3>
-
-<!-- talk about how this page needs to be used with room= in the url -->
-
-<p>This page is used to report broken door buttons. It is used in conjunction with the room= parameter in the URL to prefill the room number in the form.</p>
 
 

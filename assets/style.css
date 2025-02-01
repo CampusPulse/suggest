@@ -87,3 +87,7 @@ button:hover {
 .summary span {
 	color: #333333;
 }
+
+.pre {
+	font-family: monospace;
+}
