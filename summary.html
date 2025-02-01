@@ -56,8 +56,9 @@ title: Report Summary
 			for (const [key, value] of value_map) {
 				if (condense_exceptions && condense_exceptions.includes(key)) {
 					createSummaryElement(key, value);
+				} else {
+					condensed += `${toHumanString(key)}: ${value}<br>`;
 				}
-				condensed += `${toHumanString(key)}: ${value}<br>`;
 			}
 			createSummaryElement(condense_into, condensed);
 		} else {
