@@ -33,8 +33,10 @@ title: CampusPulse Reporting System
 <p><strong>Status:</strong> Available</p>
 <p><strong>Destination ID(s):</strong> <span class="pre">assisted</span>, <span class="pre">assisted-condense</span></p>
 
-<p>This method simplifies the process of reporting to RIT's Helpdesk somewhat by providing you a link to the correct helpdesk form as well as suggested values for you to copy-paste into the form</p>
-<p>For cases where the form fields are intended to match 1:1 with the fields in the helpdesk form, the <span class="pre">assisted</span> type should be used (this displays each item as a separate field in the summary). If the helpdesk form has fewer fields, the <span class="pre">assisted-condense</span> type should be used, as this will create a "summary" field containing all the relevant information</p>
+<p>This method simplifies the process of reporting to RIT's Helpdesk somewhat by displaying a summary page listing the values submitted to it, as well as a link to the correct helpdesk form as well as suggested values for you to copy-paste into the form</p>
+<p>For cases where the form fields are intended to match 1:1 with the fields in the helpdesk form, the <span class="pre">assisted</span> type should be used (this displays each item as a separate field in the summary). If the helpdesk form has fewer fields, the <span class="pre">assisted-condense</span> type should be used, as this will condense any fields not specifically excluded into a "Description" field containing all the relevant information</p>
+
+<p>For more information on the API of this summary page, see the <a href="#summarypage">Summary Section</a></p>
 
 <h4>3. Submit to intermediate database</h4>
 <p><strong>Status:</strong> Coming Soon</p>
@@ -47,3 +49,17 @@ title: CampusPulse Reporting System
 <p>This method simplifies the process of reporting issues to RIT when the preferred method to recieve reports is via email. This method can generate a link that will open your email client with the correct address, subject line, and contents pre-filled</p> -->
 
 
+
+
+<h2 id="summarypage">The Summary Page API</h2>
+<p>The summary page is a page that displays a summary of the data submitted to it, as well as a link to the destination page. This page is a general-purpose target for all assisted page types</p>
+
+<p>By default this page will display all parameters provided to it (<a href="{{ " /button.html" | relative_url }}?foo=bar&baz=bat">simple example</a>)</p>
+
+<p>You can also pass "internal" values to the page. These values are different in that they aren't displayed, but can change the behavior of the page. Internal values have key names beginning with an underscore</p>
+
+<p>Here is a list of these internal values:</p>
+<ul>
+	<li><strong>_sys_id</strong>: The sys_id of the ServiceNow form to submit to. if present, this will link to that catalog item using the ServiceNow domain configured, which for this site is <span class="pre">{{ site.servicenow_domain }}</span> </li>
+	<li><strong>_condense_except</strong>: If present, this causes the summary page to display all provided values as part of a single "Description" field. This is useful for the more general forms that only offer a description box and not many other details. You can also optionally supply a comma-separated list of keys to be excluded from the condensed summary (and thus displayed as they would otherwise be)</li>
+</ul>
