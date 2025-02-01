@@ -49,6 +49,25 @@ title: Report Summary
 		summary.insertBefore(summaryElement, submitButton);
 	}
 
+	function createSummary(value_map, condense_into = null, condense_exceptions = null){
+		
+		if (condense_into) {
+			let condensed = "<br>";
+			for (const [key, value] of value_map) {
+				if (condense_exceptions && condense_exceptions.includes(key)) {
+					createSummaryElement(key, value);
+				}
+				condensed += `${toHumanString(key)}: ${value}<br>`;
+			}
+			createSummaryElement(condense_into, condensed);
+		} else {
+
+			for (const [key, value] of value_map) {
+				createSummaryElement(key, value);
+			}
+		}
+	}
+
 	function populateSubmitButton(destination, title){
 		const buttonlink = document.createElement("a");
 		buttonlink.href = destination;
