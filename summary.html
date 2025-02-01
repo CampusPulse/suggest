@@ -45,6 +45,9 @@ title: Report Summary
 
 	function createSummaryElement(key, value) {
 		const summaryElement = document.createElement("p");
+		if (value === "") {
+			value = "<em>unspecified</em>";
+		}
 		summaryElement.innerHTML = `<strong>${toHumanString(key)}:</strong> <span id="${key}">${value}</span>`
 		summary.insertBefore(summaryElement, submitButton);
 	}
@@ -57,6 +60,9 @@ title: Report Summary
 				if (condense_exceptions && condense_exceptions.includes(key)) {
 					createSummaryElement(key, value);
 				} else {
+					if (value === "") {
+						value = "<em>unspecified</em>";
+					}
 					condensed += `${toHumanString(key)}: ${value}<br>`;
 				}
 			}
