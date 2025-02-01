@@ -29,7 +29,18 @@ title: Report Summary
 
 	// Populate fields with URL parameters
 	const params = new URLSearchParams(window.location.search);
-	// loop through the query parameters and populate the summary fields, but only for keys that don't start with an underscore (i.e. internal data)
+
+	let internal_params = {};
+	let summary_params = {};
+	// loop through the query parameters and partition the parameters based on internal or not( do they start with an underscore)
+
+	for (const [key, value] of params) {
+		if (!key.startsWith("_")) {
+			summary_params[key] = value;
+		} else {
+			internal_params[key] = value;
+		}
+	}
 	for (const [key, value] of params) {
 		if ( !key.startsWith("_")) {
 			if (value === ""){
