@@ -4,7 +4,7 @@
 
 
 
-{% case template.method %}
+{% case include.method %}
   {% when "assisted", "assisted-condense" %}
 	{% assign action = "/summary.html" %}
 	{% assign method = "get" %}
