@@ -8,13 +8,14 @@ title: Report Summary
 	<!-- Summary fields will be populated here -->
 	<div id="submitButton">
 	</div>
-	<p style="font-style: italic;">After clicking the button above, log in (if necessary) and copy/paste the values on this page into the form</p>
+	<p id="submitButtonDescription" style="font-style: italic; display:none">After clicking the button above, log in (if necessary) and copy/paste the values on this page into the form</p>
 </div>
 
 
 <script>
 
 	const submitButton = document.getElementById("submitButton");
+	const submitButtonDescription = document.getElementById("submitButtonDescription");
 	const summary = document.getElementsByClassName("summary")[0];
 
 
@@ -86,6 +87,8 @@ title: Report Summary
 		button.innerHTML = title;
 		buttonlink.appendChild(button);
 		submitButton.appendChild(buttonlink);
+		// show the description
+		submitButtonDescription.style.display = "block";
 	}
 
 	function replaceValues(inputText, value_map) {
