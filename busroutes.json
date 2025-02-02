@@ -25,6 +25,12 @@
 			"schedule_url": "https://www.rit.edu/parking/4-175-jefferson-park-point"
 		},
 		{
+			"id": "5",
+			"name": "175 Jefferson - Park Point Morning",
+			"type": "weekday",
+			"schedule_url": "https://www.rit.edu/parking/5-175-jefferson-park-point-morning"
+		},
+		{
 			"id": "6",
 			"name": "Apex",
 			"type": "weekday",
