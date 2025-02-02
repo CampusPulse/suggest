@@ -26,6 +26,13 @@ condense_except: what-area-does-this-pertain-to,subject
 		<option value="" disabled selected>Select a route</option>
 	</select>
 
+	<label for="time">When did this happen?</label>
+	<div class="sidebyside">
+		<input type="datetime-local" id="time" name="time" required>
+		<button type="button" step="any" required onclick="document.getElementById('time').value = new Date().toLocaleString([], { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', hour12: false}).replace(',', '').replace(/(\d+)\/(\d+)\/(\d+)/, '$3-$1-$2').replace(' ', 'T')">Now</button>
+	</div>
+
+
 
 	<label for="description">Description of the Problem</label>
 	<textarea id="description" name="description" placeholder="Describe the issue..." rows="5"></textarea>
