@@ -80,6 +80,8 @@ title: Report Summary
 	function populateSubmitButton(destination, title){
 		const buttonlink = document.createElement("a");
 		buttonlink.href = destination;
+		buttonlink.target = "_blank";
+		buttonlink.rel = "noopener noreferrer";
 		const button = document.createElement("button");
 		button.innerHTML = title;
 		buttonlink.appendChild(button);
