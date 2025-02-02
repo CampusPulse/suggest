@@ -35,7 +35,7 @@ condense_except: what-area-does-this-pertain-to,subject
 
 
 	<label for="description">Description of the Problem</label>
-	<textarea id="description" name="description" placeholder="Describe the issue..." rows="5"></textarea>
+	<textarea id="description" name="description" placeholder="Describe the issue. i.e. My bus was more than 5-10 minutes late" rows="5"></textarea>
 	<!-- hidden form items -->
 	{% for item in page.staticvalues %}
 		<input type="hidden" name="{{ item.name }}" value="{{ item.value }}">
