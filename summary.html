@@ -89,6 +89,28 @@ title: Report Summary
 		populateSubmitButton(`https://{{ site.servicenow_domain }}/sp?id=sc_cat_item&sys_id=${internal_params.get("_sys_id")}`, "Submit to {{ site.servicenow_domain }}");
 	}
 
+	if (internal_params.get("_subject")) {
+		let subject = internal_params.get("_subject");
+		let subject_words = subject.split(" ");
+		// if any of the words in the subject match a key in the summary_params, replace it with the value
+		for (let i = 0; i < subject_words.length; i++) {
+			let lookup_identifier = subject_words[i];
+			console.log(lookup_identifier);
+			// remove the brackets and check if the key exists
+			if (lookup_identifier.startsWith("{") && lookup_identifier.endsWith("}")) {
+				lookup_identifier = lookup_identifier.slice(1, -1);
+				console.log(lookup_identifier);
+			} else {
+				continue
+			}
+			if (summary_params.has(lookup_identifier)) {
+				subject_words[i] = summary_params.get(lookup_identifier);
+			}
+		}
+		subject = subject_words.join(" ");
+		summary_params.set("subject", subject);
+	}
+
 	if (internal_params.get("_condense_except")) {
 		let condense_except = internal_params.get("_condense_except");
 		condense_except.replaceAll(" ", "");
