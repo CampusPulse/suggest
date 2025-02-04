@@ -17,13 +17,13 @@ condense_except: what-area-does-this-pertain-to,subject
 <h1>{{page.title}}</h1>
 {% include form_start.html method=page.submit_method %}
 	<label for="route">What route is affected?</label>
-	<select id="route" name="route" required>
-		<option value="" disabled selected>Select a route</option>
+	<select id="route" name="route" required onchange="updateStopList(this[this.selectedIndex].id)">
+		<option value="" id="route_default" disabled selected>Select a route</option>
 	</select>
 
 	<label for="stop">Which stop is affected?</label>
 	<select id="stop" name="stop" required>
-		<option value="" disabled selected>Select a stop</option>
+		<option value="" id="stop_default" disabled selected>Select a stop</option>
 	</select>
 
 	<label for="time">When did this happen?</label>
@@ -45,28 +45,84 @@ condense_except: what-area-does-this-pertain-to,subject
 
 
 <script>
-	// Load buildings from JSON
+	const stopSelectElement = document.getElementById("stop")
+
 	fetch('/busroutes.json')
 		.then(response => response.json())
 		.then(data => {
 			const routeSelect = document.getElementById('route');
 			data.routes.forEach(route => {
 				const option = document.createElement('option');
+				option.id = `route-${route.id}`;
 				option.value = `${route.id} ${route.name}`;
 				option.textContent = `${route.id} ${route.name}`;
 				routeSelect.appendChild(option);
 			});
 		});
 
-	fetch('/busstops.json')
+	const busstops = fetch('/busstops.json')
 		.then(response => response.json())
-		.then(data => {
-			const stopSelect = document.getElementById('stop');
-			data.stops.forEach(stop => {
-				const option = document.createElement('option');
-				option.value = `${stop.id} ${stop.name}`;
-				option.textContent = `${stop.id} ${stop.name}`;
-				stopSelect.appendChild(option);
+
+	const stop_route_map = fetch('/busroutesbystop.json')
+		.then(response => response.json())
+
+
+	function reverseObjectOfLists(obj) {
+		// this function made by chatGPT
+		const reversed = {};
+		for (const [key, values] of Object.entries(obj)) {
+			for (const value of values) {
+				if (!reversed[value]) {
+					reversed[value] = [];
+				}
+				reversed[value].push(Number(key));
+			}
+		}
+		return reversed;
+	}
+
+
+	function clearBusStops(except = ['stop_default']) {
+		for (const child of Array.from(stopSelectElement.childNodes)) {
+			if (!except.includes(child.id)){
+				stopSelectElement.removeChild(child);
+			}
+		}
+	}
+
+	function createStopOption(stop) {
+		const option = document.createElement('option');
+		option.id = `stop-${stop.id}`;
+		option.value = `${stop.id} ${stop.name}`;
+		option.textContent = `${stop.id} ${stop.name}`;
+		return option;
+	}
+
+
+	function updateStopList(route) {
+	
+		if (route) {
+			updateStopList()
+			const routeID = route.split("-")[1];
+
+			stop_route_map.then(srm => reverseObjectOfLists(srm))
+				.then(stopsByRoute => stopsByRoute[routeID].map((id) => `stop-${id}`))
+				.then((except) => {
+					except.push('stop_default');
+					console.log(except);
+					clearBusStops(except);
+				});
+
+		} else {
+			clearBusStops()
+			busstops.then(data => {
+				const stopSelect = document.getElementById('stop');
+				data.stops.forEach(stop => {
+					stopSelect.appendChild(createStopOption(stop));
+				});
 			});
-		});
+		}
+	}
+
+	updateStopList();
 </script>
