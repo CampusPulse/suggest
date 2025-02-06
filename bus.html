@@ -35,7 +35,14 @@ condense_except: what-area-does-this-pertain-to,subject
 
 
 	<label for="description">Description of the Problem</label>
-	<textarea id="description" name="description" placeholder="Describe the issue. i.e. My bus was more than 5-10 minutes late" rows="5"></textarea>
+	<div class="sidebyside" style="flex-wrap: wrap;">
+		<button onclick="addToDesc('The bus did not stop for me. ')">Missed my Stop</button>
+		<button onclick="addToDesc('The bus was early. ')">Early</button>
+		<button onclick="addToDesc('The bus was late. ')">Late</button>
+		<button onclick="addToDesc('The bus was full or overcrowded. ')">overcrowded</button>
+		<button onclick="addToDesc('I didn\'t feel safe on the bus. ')">feels unsafe</button>
+	</div>
+	<textarea id="description" name="description" placeholder="Describe the issue. i.e. my bus was overcrowded and arrived 13 minutes late" rows="5"></textarea>
 	<!-- hidden form items -->
 	{% for item in page.staticvalues %}
 		<input type="hidden" name="{{ item.name }}" value="{{ item.value }}">
@@ -46,6 +53,8 @@ condense_except: what-area-does-this-pertain-to,subject
 
 <script>
 	const stopSelectElement = document.getElementById("stop")
+	const descriptionElement = document.getElementById("description")
+
 
 	fetch('/busroutes.json')
 		.then(response => response.json())
@@ -66,6 +75,10 @@ condense_except: what-area-does-this-pertain-to,subject
 	const stop_route_map = fetch('/busroutesbystop.json')
 		.then(response => response.json())
 
+
+	function addToDesc(str) {
+		descriptionElement.value += str; 
+	}
 
 	function reverseObjectOfLists(obj) {
 		// this function made by chatGPT

@@ -102,3 +102,7 @@ button:hover {
 	margin: 10px;
 
 }
+
+.sidebyside button {
+	flex-basis: 130px;
+}
