@@ -1,0 +1,72 @@
+---
+layout: default
+title: CampusPulse Reporting System - Documentation
+---
+<h1>{{ page.title }}</h1>
+<p>Welcome to the CampusPulse Reporting System</p>
+
+<p>This page is intended to act as documentation on how to use this site to direct people towards filling out ServiceNow Tickets. This page is (in most cases) not meant to be directly viewed unless you want to know how to implement this reporting process in your system</p>
+
+
+<h2>Overall Process</h2>
+<h3>Step 1: Form</h3>
+<p>The process begins with a form page, where the viewer is asked for some information. This information depends on the specific form being filled out.</p>
+
+<p>These form pages can also define hidden static values that are not visible on the form page, but are passed through when submitting the form. This can help pre-fill basic values (like category) that remain static for a given form, in addition to the custom form fields that are defined on the page</p>
+<h4 style="text-decoration: underline;">Available Forms:</h4>
+
+<strong>button.html (<a href="{{ "/button.html" | relative_url }}">link</a>)</strong>
+
+<p>This page is used to guide students through the process of reporting broken accessible door buttons. It is expected to be used in conjunction with the room= parameter in the URL to prefill the room number in the form.</p>
+
+<!-- TODO: elevators -->
+
+<strong>bus.html (<a href="{{ "/bus.html" | relative_url }}">link</a>)</strong>
+
+
+<p>This page is used to guide people through the process of reporting late or broken RIT Shuttle busses. RIT Parking and Transportation Services (PATS) requests that reports be made if a bus is as little as 5-10 min. This allows the service desk and PATS to rapidly get in contact with the transportation vendor to inquire about the location of the bus</p>
+
+<h3>Step 2: Destination</h3>
+<p>Each form is configured with a target destination. These help determine which reporting method that the process follows.</p>
+
+<h4 style="text-decoration: underline;">Reporting methods</h4>
+
+<h4>1. Automatic Form filling</h4>
+<p><strong>Status:</strong> Pending RIT integration</p>
+<p><strong>Destination ID:</strong> TBD</p>
+<p>This method enables this site to pre-fill most or all of the information in RIT's Helpdesk forms for you by redirecting you to the RIT helpdesk with some additional data in the URL</p>
+
+<h4>2. Assisted Form Filling</h4>
+<p><strong>Status:</strong> Available</p>
+<p><strong>Destination ID(s):</strong> <span class="pre">assisted</span>, <span class="pre">assisted-condense</span></p>
+
+<p>This method simplifies the process of reporting to RIT's Helpdesk somewhat by displaying a summary page listing the values submitted to it, as well as a link to the correct helpdesk form as well as suggested values for you to copy-paste into the form</p>
+<p>For cases where the form fields are intended to match 1:1 with the fields in the helpdesk form, the <span class="pre">assisted</span> type should be used (this displays each item as a separate field in the summary). If the helpdesk form has fewer fields, the <span class="pre">assisted-condense</span> type should be used, as this will condense any fields not specifically excluded into a "Description" field containing all the relevant information</p>
+
+<p>For more information on the API of this summary page, see the <a href="#summarypage">Summary Section</a></p>
+
+<h4>3. Submit to intermediate database</h4>
+<p><strong>Status:</strong> Coming Soon</p>
+<p><strong>Destination ID:</strong> TBD</p>
+<p>This method will submit the form to a pre-configured endpoint via HTTP POST, allowing it to be stored in a database, or otherwise dealt with by that system</p>
+
+<!-- <h4>3. Email</h4>
+<p><strong>Status:</strong> Coming Soon</p>
+<p><strong>Destination ID:</strong> TBD</p>
+<p>This method simplifies the process of reporting issues to RIT when the preferred method to recieve reports is via email. This method can generate a link that will open your email client with the correct address, subject line, and contents pre-filled</p> -->
+
+
+
+
+<h2 id="summarypage">The Summary Page API</h2>
+<p>The summary page is a page that displays a summary of the data submitted to it, as well as a link to the destination page. This page is a general-purpose target for all assisted page types</p>
+
+<p>By default this page will display all parameters provided to it (<a href="{{ " /button.html" | relative_url }}?foo=bar&baz=bat">simple example</a>)</p>
+
+<p>You can also pass "internal" values to the page. These values are different in that they aren't displayed, but can change the behavior of the page. Internal values have key names beginning with an underscore</p>
+
+<p>Here is a list of these internal values:</p>
+<ul>
+	<li><strong>_sys_id</strong>: The sys_id of the ServiceNow form to submit to. if present, this will link to that catalog item using the ServiceNow domain configured, which for this site is <span class="pre">{{ site.servicenow_domain }}</span> </li>
+	<li><strong>_condense_except</strong>: If present, this causes the summary page to display all provided values as part of a single "Description" field. This is useful for the more general forms that only offer a description box and not many other details. You can also optionally supply a comma-separated list of keys to be excluded from the condensed summary (and thus displayed as they would otherwise be)</li>
+</ul>
