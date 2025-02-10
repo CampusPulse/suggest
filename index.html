@@ -3,3 +3,35 @@ layout: default
 title: CampusPulse Reporting System
 ---
 <h1>{{ page.title }}</h1>
+<p>Welcome to the CampusPulse Reporting System. This site aims to help guide you through the process of reporting issues to {{ site.servicenow_domain }} through forms that are easy to access</p>
+
+<p>What would you like to report?</p>
+
+<div class="menu-container">
+	<a href="{{ "/bus.html" | relative_url }}" class="menu-button" target="_blank" rel="noopener">
+		<div class="menu-content">
+			<i class="fas fa-bus" style="font-size: 2em;"></i>
+			<h2>Report Bus Issues</h2>
+			<p>Tell RIT about shuttle issues</p>
+		</div>
+	</a>
+	<a href="{{ "/button.html" | relative_url }}" class="menu-button" target="_blank" rel="noopener">
+		<div class="menu-content">
+			<i class="fab fa-accessible-icon" style="font-size: 2em;"></i>
+
+			<h2>Door Button</h2>
+			<p>Report a broken door opener</p>
+		</div>
+	</a>
+	{%- comment -%} <a href="{{ "/elevator.html" | relative_url }}" class="menu-button" target="_blank" rel="noopener">
+		<div class="menu-content">
+			<i class="fas fa-elevator" style="font-size: 2em;"></i>
+
+			<h2>Elevator</h2>
+			<p>Report a broken Elevator</p>
+		</div>
+	</a> {%- endcomment -%}
+</div>
+
+
+<p>Want to know how all this works? Check out our <a href="{{ "/docs.html" | relative_url }}">Documentation</a>!</p>
