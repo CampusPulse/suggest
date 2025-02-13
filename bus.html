@@ -123,7 +123,10 @@ condense_except: what-area-does-this-pertain-to,subject
 				.then((except) => {
 					except.push('stop_default');
 					console.log(except);
-					clearBusStops(except);
+					// if there are no other stops (i.e. theres only one exception), dont clear the list
+					if (except.length > 1){
+						clearBusStops(except);
+					}
 				});
 
 		} else {

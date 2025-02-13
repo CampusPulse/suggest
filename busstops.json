@@ -149,7 +149,12 @@
 			"id": "41",
 			"name": "G/H Lot",
 			"description": "The bus stop at G and H Lot."
-		}
+		},
+		{
+			"id": "0",
+			"name": "Other/Not listed",
+			"description": "Some other location"
+		},
 	],
 	"source_url": "https://www.rit-bus.app/stops"
 }
