@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: centercontent
 title: Report Bus Issues
 
 staticvalues:
@@ -12,8 +12,6 @@ submit_method: assisted-condense
 submit_destination: 3f1dd0320a0a0b99000a53f7604a2ef9
 condense_except: what-area-does-this-pertain-to,subject
 ---
-
-<h1>{{page.title}}</h1>
 {% include form_start.html method=page.submit_method destination=page.submit_destination %}
 	<label for="route">What route is affected?</label>
 	<select id="route" name="route" required onchange="updateStopList(this[this.selectedIndex].id)">

@@ -28,12 +28,12 @@ h1 {
 	text-align: center;
 }
 
-form {
+.pageContent {
 	background: #ffffff;
 	padding: 20px;
 	border-radius: 8px;
 	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-	max-width: 400px;
+	max-width: 600px;
 	margin: auto;
 }
 
@@ -69,16 +69,7 @@ button {
 button:hover {
 	background-color: #003d80;
 }
-
-.summary {
-	background: #ffffff;
-	padding: 20px;
-	border-radius: 8px;
-	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-	max-width: 600px;
-	margin: auto;
-}
-
+/* .summary is fundamentally the same as .pageContent */
 .summary p {
 	font-size: 16px;
 	margin: 10px 0;
