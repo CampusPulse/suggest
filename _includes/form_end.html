@@ -12,6 +12,11 @@
 		{%- comment -%} TODO: add more here for the automated and direct submission modes {%- endcomment -%}
 		{% assign assisted = "true" %}
 		{% assign stage2_target = include.destination.sys_id %}
+
+	{% when "submit" %}
+		{% assign submitButtonTitle = "Submit" %}
+		{% assign stage2_target = include.destination.redirect_url %}
+
 	{% else %}
 		
 {% endcase %}
@@ -19,6 +24,12 @@
 {% if stage2_target != "" and assisted == "true"  %}
 <input type="hidden" name="_sys_id" value="{{ stage2_target }}">
 {% endif %}
+
+{%- comment -%} default to the success page if nothing else provided {%- endcomment -%}
+{%- comment -%} {% if stage2_target == "" and include.destination.method == "submit" %}
+<input type="hidden" name="redirect_url" value="{{ "/success.html" | absolute_url }}">
+{% endif %} {%- endcomment -%}
+
 
 
 {% if include.destination.method == "assisted-condense" and include.destination.condense_except != "" %}
