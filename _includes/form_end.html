@@ -12,8 +12,8 @@
 		{% assign assisted = "false" %}
 {% endcase %}
 
-{% if page.sys_id != "" and assisted == "true"  %}
-<input type="hidden" name="_sys_id" value="{{ page.sys_id }}">
+{% if include.destination != "" and assisted == "true"  %}
+<input type="hidden" name="_sys_id" value="{{ include.destination }}">
 {% endif %}
 
 {% if include.method == "assisted-condense" %}

@@ -8,6 +8,9 @@
   {% when "assisted", "assisted-condense" %}
 	{% assign action = "/summary.html" %}
 	{% assign method = "get" %}
+  {% when "submit" %}
+	{% assign action = include.destination %}
+	{% assign method = "post" %}
   {% else %}
 	{% assign action = "/summary.html" %}
 	{% assign method = "get" %}
