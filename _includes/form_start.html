@@ -4,12 +4,12 @@
 
 
 
-{% case include.method %}
+{% case include.destination.method %}
   {% when "assisted", "assisted-condense" %}
 	{% assign action = "/summary.html" %}
 	{% assign method = "get" %}
   {% when "submit" %}
-	{% assign action = include.destination %}
+	{% assign action = include.destination.location %}
 	{% assign method = "post" %}
   {% else %}
 	{% assign action = "/summary.html" %}

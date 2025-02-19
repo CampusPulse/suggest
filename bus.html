@@ -8,11 +8,12 @@ staticvalues:
   - name: _subject
     value: Route {route} problem reported via CampusPulse
 
-submit_method: assisted-condense
-submit_destination: 3f1dd0320a0a0b99000a53f7604a2ef9
-condense_except: what-area-does-this-pertain-to,subject
+destination:
+  method: assisted-condense
+  sys_id: 3f1dd0320a0a0b99000a53f7604a2ef9
+  condense_except: what-area-does-this-pertain-to,subject
 ---
-{% include form_start.html method=page.submit_method destination=page.submit_destination %}
+{% include form_start.html destination=page.destination %}
 	<label for="route">What route is affected?</label>
 	<select id="route" name="route" required onchange="updateStopList(this[this.selectedIndex].id)">
 		<option value="" id="route_default" disabled selected>Select a route</option>
@@ -45,7 +46,7 @@ condense_except: what-area-does-this-pertain-to,subject
 		<input type="hidden" name="{{ item.name }}" value="{{ item.value }}">
 	{% endfor %}
 	<!-- TODO: submit building name too -->
-	{% include form_end.html method=page.submit_method destination=page.submit_destination %}
+	{% include form_end.html destination=page.destination %}
 
 
 <script>

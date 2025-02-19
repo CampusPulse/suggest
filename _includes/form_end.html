@@ -2,22 +2,27 @@
 {%- comment -%} this file contains the logic for sending the form data different places based on the mode {%- endcomment -%}
 
 {% assign submitButtonTitle = "Continue" %}
+{% assign assisted = "false" %}
 
+{%- comment -%} the primary destination of the form is handled in the form_start template. this value helps configure the form for secondary pages (i.e. redirect URLs on success, or showing a serviceNow link on the summary page) {%- endcomment -%}
+{% assign stage2_target = "" %}
 
-{% case include.method %}
+{% case include.destination.method %}
 	{% when "assisted","assisted-condense" %}
 		{%- comment -%} TODO: add more here for the automated and direct submission modes {%- endcomment -%}
 		{% assign assisted = "true" %}
+		{% assign stage2_target = include.destination.sys_id %}
 	{% else %}
-		{% assign assisted = "false" %}
+		
 {% endcase %}
 
-{% if include.destination != "" and assisted == "true"  %}
-<input type="hidden" name="_sys_id" value="{{ include.destination }}">
+{% if stage2_target != "" and assisted == "true"  %}
+<input type="hidden" name="_sys_id" value="{{ stage2_target }}">
 {% endif %}
 
-{% if include.method == "assisted-condense" %}
-	<input type="hidden" name="_condense_except" value="{{ page.condense_except }}">
+
+{% if include.destination.method == "assisted-condense" and include.destination.condense_except != "" %}
+	<input type="hidden" name="_condense_except" value="{{ include.destination.condense_except }}">
 {% endif %}
 	<button type="submit">{{ submitButtonTitle }}</button>
 	{% include form_issues.html %}
