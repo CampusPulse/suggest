@@ -25,12 +25,6 @@
 <input type="hidden" name="_sys_id" value="{{ stage2_target }}">
 {% endif %}
 
-{%- comment -%} default to the success page if nothing else provided {%- endcomment -%}
-{%- comment -%} {% if stage2_target == "" and include.destination.method == "submit" %}
-<input type="hidden" name="redirect_url" value="{{ "/success.html" | absolute_url }}">
-{% endif %} {%- endcomment -%}
-
-
 
 {% if include.destination.method == "assisted-condense" and include.destination.condense_except != "" %}
 	<input type="hidden" name="_condense_except" value="{{ include.destination.condense_except }}">

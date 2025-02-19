@@ -48,9 +48,11 @@ title: CampusPulse Reporting System - Documentation
 <p>For more information on the API of this summary page, see the <a href="#summarypage">Summary Section</a></p>
 
 <h4>3. Submit to intermediate database</h4>
-<p><strong>Status:</strong> Coming Soon</p>
-<p><strong>Destination ID:</strong> TBD</p>
-<p>This method will submit the form to a pre-configured endpoint via HTTP POST, allowing it to be stored in a database, or otherwise dealt with by that system</p>
+<p><strong>Status:</strong> Available</p>
+<p><strong>Destination ID:</strong> submit</p>
+<p><strong>Additional Values:</strong> <i>The URL to POST the form data to, as the <span class="pre">location</span></i></p>
+<!-- <p><strong>Extra Values:</strong> <i>The URL to redirect to on successful submission, provided via a preset form element with the name/ID of <span class="pre">redirect_url</span>.</i></p> -->
+<p>This method will submit the form to a pre-configured endpoint via HTTP POST, allowing it to be stored in a database, or otherwise dealt with by that system. To prevent open redirect attacks, this will always redirect the user to the <a href="{{ " /success.html" | relative_url }}">Success Page</a></p>
 
 <!-- <h4>3. Email</h4>
 <p><strong>Status:</strong> Coming Soon</p>
