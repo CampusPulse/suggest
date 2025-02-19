@@ -94,11 +94,9 @@ title: Report Summary
 		// if any of the words in the inputText match a key in the summary_params (surrounded by {}), replace it with the value
 		for (let i = 0; i < words.length; i++) {
 			let lookup_identifier = words[i];
-			console.log(lookup_identifier);
 			// remove the brackets and check if the key exists
 			if (lookup_identifier.startsWith("{") && lookup_identifier.endsWith("}")) {
 				lookup_identifier = lookup_identifier.slice(1, -1);
-				console.log(lookup_identifier);
 			} else {
 				continue
 			}
