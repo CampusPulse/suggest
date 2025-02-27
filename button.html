@@ -56,7 +56,7 @@ destination:
 			const buildingSelect = document.getElementById('building');
 			data.buildings.forEach(building => {
 				const option = document.createElement('option');
-				option.value = building.id;
+				option.value = `${building.id}:${building.name}`;
 				option.textContent = `${building.name}`;
 				buildingSelect.appendChild(option);
 			});
