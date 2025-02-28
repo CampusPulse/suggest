@@ -67,6 +67,13 @@
 			"schedule_url": "https://www.rit.edu/parking/11-weekend-campus-inn-shuttle"
 		}, 
 		{
+			"id": "12",
+			"name": "Campus & Inn Break Shuttle",
+			"type": "both",
+			"schedule_url": "https://www.rit.edu/parking/12-campus-inn-break-shuttle",
+			"notes": "starting March 8, 2025"
+		},
+		{
 			"id": "14",
 			"name": "175 Jefferson - Park Point - Perkins",
 			"type": "weekday",
