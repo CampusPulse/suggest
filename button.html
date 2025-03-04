@@ -38,8 +38,9 @@ destination:
 	<label for="description">Description of the Problem</label>
 	<textarea id="description" name="description" required placeholder="Describe the issue..." rows="5"></textarea>
 
-	<label for="email_optin">Email me with updates about this report</label>
-	<input type="checkbox" id="email_optin" name="email_optin" value="true"/>
+	<label for="email_optin">
+	<input type="checkbox" id="email_optin" name="email_optin" value="true"/> Email me with updates about this report
+	</label>
 	
 	<!-- hidden form items -->
 	 {% for item in page.staticvalues %}
