@@ -58,6 +58,10 @@ button {
 	/* Ensures padding is included in width calculation */
 }
 
+button {
+	width: auto;
+}
+
 input[type=checkbox] {
 	width: auto
 }
@@ -93,7 +97,6 @@ button:hover {
 }
 
 .sidebyside > * {
-	flex: 1;
 	margin: 10px;
 
 }
