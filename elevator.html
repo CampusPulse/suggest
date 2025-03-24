@@ -1,0 +1,92 @@
+---
+layout: centercontent
+title: Report Broken Elevator
+
+
+staticvalues:
+  - name: phone
+    value: 503 832 7422
+  - name: contact_method
+    value: Text
+  - name: type
+    value: elevator	
+  - name: category
+    value: Elevator/Escalator
+  - name: room
+    value: Not provided
+
+destination:
+  method: submit
+  location: https://api.report.campuspulse.app/api/airtable
+---
+<!-- https://help.rit.edu/sp?id=sc_cat_item&sys_id=5deabdbb1bf641100ba4a7562a4bcb93 -->
+<p><strong>NOTE:</strong><br> If this is an emergency (i.e. you are stuck) please call public safety. <br> Their number is <a href="tel:585-475-3333">(585) 475-3333</a> </p>
+
+{% include form_start.html destination=page.destination %}
+	<label for="name">Your Name</label>
+	<input type="text" id="name" name="name" required placeholder="Enter your name">
+	
+	<label for="email">Your Email</label>
+	<input type="email" id="email" name="email" required placeholder="Enter your email">
+	
+	<label for="building">Building</label>
+	<select id="building" name="building" required>
+		<option value="" disabled selected>Select a building</option>
+	</select>
+	
+	<label for="floor">Floor</label>
+	<input type="text" id="floor" name="floor" placeholder="Enter the floor (e.g., A for Basement, 1, 2, etc.)" pattern="A|B|[0-9]" title="Enter floor number as either 'A', 'B', or a single numeric value">
+
+	<label for="room">Location</label>
+	<input type="text" id="room" name="room" placeholder="Describe the elevator location" title="Describe the elevator location">
+	
+	<label for="description">Description of the Problem</label>
+	<div class="sidebyside" style="flex-wrap: wrap;">
+		<button onclick="addToDesc('The elevator is not responding. ')">Not Responsive</button>
+		<button onclick="addToDesc('The elevator button lights dont work. ')">Button Lights Dead</button>
+		<button onclick="addToDesc('The elevator door wont open/close. ')">Door Won't Open/Close</button>
+		<button onclick="addToDesc('The button is dirty. ')">Dirty</button>
+		<button onclick="addToDesc('The button or door is obstructed. ')">Obstructed</button>
+		<button onclick="addToDesc('I didn\'t feel safe using the elevatpor. ')">Feels Unsafe</button>
+	</div>
+	<span>Please elaborate with more details in the box below</span>
+	<textarea id="description" name="description" required placeholder="Describe the issue..." rows="5"></textarea>
+
+	<label for="email_optin">
+	<input type="checkbox" id="email_optin" name="email_optin" value="true"/> Email me with updates about this report
+	</label>
+	
+	<!-- hidden form items -->
+	 {% for item in page.staticvalues %}
+		<input type="hidden" name="{{ item.name }}" value="{{ item.value }}">
+	{% endfor %}
+	<!-- TODO: submit building name too -->
+	{% include form_end.html destination=page.destination %}
+
+<script>
+	const descriptionElement = document.getElementById("description")
+
+	function addToDesc(str) {
+		descriptionElement.value += str;
+	}
+
+	// Load buildings from JSON
+	fetch('/buildings.json')
+		.then(response => response.json())
+		.then(data => {
+			const buildingSelect = document.getElementById('building');
+			data.buildings.forEach(building => {
+				const option = document.createElement('option');
+				option.value = `${building.id}:${building.name}`;
+				option.textContent = `${building.name}`;
+				buildingSelect.appendChild(option);
+			});
+		});
+
+	// accept room number from URL parameters
+	const urlParams = new URLSearchParams(window.location.search);
+	const room = urlParams.get("room");
+	if (room) {
+		document.getElementById("room").value = room;
+	}
+</script>
