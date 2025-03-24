@@ -38,6 +38,13 @@ destination:
 	<input type="text" id="floor" name="floor" required placeholder="Enter the floor (e.g., A for Basement, 1, 2, etc.)" pattern="A|B|[0-9]" title="Enter floor number as either 'A', 'B', or a single numeric value">
 	
 	<label for="description">Description of the Problem</label>
+	<div class="sidebyside" style="flex-wrap: wrap;">
+		<button onclick="addToDesc('The button is not responding. ')">Not Responsive</button>
+		<button onclick="addToDesc('The button is physically damaged. ')">Physically Damaged</button>
+		<button onclick="addToDesc('The button is dirty. ')">Dirty</button>
+		<button onclick="addToDesc('The button or door is obstructed. ')">Obstructed</button>
+	</div>
+	<span>Please elaborate with more details in the box below</span>
 	<textarea id="description" name="description" required placeholder="Describe the issue..." rows="5"></textarea>
 
 	<label for="email_optin">
@@ -52,6 +59,12 @@ destination:
 	{% include form_end.html destination=page.destination %}
 
 <script>
+	const descriptionElement = document.getElementById("description")
+
+	function addToDesc(str) {
+		descriptionElement.value += str;
+	}
+
 	// Load buildings from JSON
 	fetch('/buildings.json')
 		.then(response => response.json())
